@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/512px-Google_Classroom_Logo.svg.png" type="image/x-icon">
+    <title>Classroom</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f8f8f8; /* Set your background color */
+        }
+
+        .loading-container {
+            text-align: center;
+        }
+
+        .loading-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333; /* Set your text color */
+            margin-bottom: 20px;
+        }
+
+        .progress-bar-container {
+            width: 200px; /* Set the width of the progress bar container */
+            background-color: #ddd; /* Set the background color of the progress bar container */
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 30px; /* Set the height of the progress bar */
+            background-color: #3498db; /* Set the color of the progress bar */
+            border-radius: 8px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="loading-text">Loading Skidded Projects...</div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </div>
+
+    <script>
+        // Simulate loading progress
+        let progress = 0;
+        const progressBar = document.getElementById('progressBar');
+        const intervalId = setInterval(() => {
+            progress += 10;
+            progressBar.style.width = `${progress}%`;
+
+            if (progress >= 100) {
+                clearInterval(intervalId);
+                // Redirect to main page after the loading is complete
+                window.location.href = 'main-page.html';
+            }
+        }, 500);
+    </script>
+</body>
+</html>

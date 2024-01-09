@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Browser</title>
+</head>
+<body>
+  if you want games to be added, then go to the big plus on the gxmes page.
+    here are the things you can search... 
+    1. Math Is Cool
+    2. Project Fun
+    3. Games 10x10
+    4. Games(will come up with some games)
+    <form>
+        <input type="text" id="searchInput" placeholder="Enter your search query">
+        <button type="button" onclick="search()">Search</button>
+    </form>
+    
+    <h3>Search Results:</h3>
+    <ul id="searchResults"></ul>
+
+    <script>
+        function search() {
+            // Clear previous search results
+            document.getElementById("searchResults").innerHTML = "";
+
+            // Get the search query from the input field
+            var query = document.getElementById("searchInput").value.toLowerCase();
+
+            // Perform search based on query
+            var searchResults = performSearch(query);
+
+            // Display the search results
+            displayResults(searchResults);
+        }
+
+        function performSearch(query) {
+            var results = [];
+
+            // Perform your search algorithm here
+            // This example uses a simple keyword matching approach
+
+            var keywords = {
+                "math": [
+                    { label: "Math is Cool", link: "https://math-is-cool.netlify.app" }
+                ],
+                "project": [
+                    { label: "Project Fun", link: "https://sites.google.com/view/project-fun2"}
+                ],
+                "games": [
+                    { label: "1v1 lol", link: "1v1lol.html"},
+                    { label: "Raft Wars", link: "raftwars.html"},
+                    { label: 'Slope', link: 'SLOPE.html' },
+                    { label: "Stickman Hook", link: "stickman-hook.html" },
+                ],
+                "10": [
+                { label: "Games 10x10", link: "https://sites.google.com/view/games10x10" },
+                ],
+            };
+
+            // Split the query into individual words
+            var queryWords = query.split(" ");
+
+            // Iterate over the keywords and check for matches
+            for (var keyword in keywords) {
+                var keywordMatches = keywords[keyword];
+                var keywordFound = false;
+
+                // Check if any query word matches the keyword
+                for (var i = 0; i < queryWords.length; i++) {
+                    var queryWord = queryWords[i];
+                    if (keyword.includes(queryWord)) {
+                        // Add the keyword matches to the search results
+                        results = results.concat(keywordMatches);
+                        keywordFound = true;
+                        break;
+                    }
+                }
+
+                if (keywordFound) {
+                    // If keyword found, stop further iteration
+                    break;
+                }
+            }
+
+            return results;
+        }
+
+        function displayResults(results) {
+            var list = document.getElementById("searchResults");
+
+            results.forEach(function(result) {
+                var listItem = document.createElement("li");
+                var link = document.createElement("a");
+                link.textContent = result.label;
+                link.href = result.link;
+                listItem.appendChild(link);
+                list.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>
